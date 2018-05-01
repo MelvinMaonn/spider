@@ -16,6 +16,7 @@ class Application(Frame):
 
     def createWidgets(self):
 
+        # 关键词选择相关控件
         self.filePathLabel = Label(self, text='关键词文件：')
         self.filePathLabel.grid(row = 0, column = 0)
 
@@ -25,6 +26,7 @@ class Application(Frame):
         self.selectButton = Button(self, text='选择', command=self.selectFile)
         self.selectButton.grid(row = 0, column = 2)
 
+        # 输出路径选择相关控件
         self.outputfilePathLabel = Label(self, text='输出文件路径：')
         self.outputfilePathLabel.grid(row=1, column=0)
 
@@ -34,6 +36,7 @@ class Application(Frame):
         self.outputselectButton = Button(self, text='选择', command=self.selectPath)
         self.outputselectButton.grid(row=1, column=2)
 
+        # 开始按钮
         self.startButton = Button(self, text='开始', command=self.start)
         self.startButton.grid(row = 2,  column = 1)
 
@@ -53,7 +56,6 @@ class Application(Frame):
             tkinter.messagebox._show("Error", message="please select a keyword file and output path!")
             return
 
-        # self.startButton
         spider = Spider()
         spider.readKeyWord(filePath=self.filePath)
         spider.searchKeyWord()

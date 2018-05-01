@@ -24,9 +24,11 @@ class Spider:
 
     def searchKeyWord(self):
         for keyWord in keyWords:
+            # 在字典中初始化该关键词相关记录
             data = {
                 keyWord: {keyWord + '_ad_position': [], keyWord + '_natural_position': [], keyWord + '_all_position': []}}
             self.resultDic.update(data)
+
             self.driver.get("https://www.amazon.co.uk/")
             time.sleep(10)
             self.driver.find_element_by_id("twotabsearchtextbox").click()
@@ -67,18 +69,21 @@ class Spider:
         keyWordNum = 1
 
         for keyWord in keyWords:
+            # 广告sheet
             worksheet = workbook.add_sheet(str(keyWordNum) + '_ad_position')
             row = 0
             for title in self.resultDic.get(keyWord).get(keyWord + '_ad_position'):
                 worksheet.write(row, 0, title)
                 row += 1
 
+            # 自然位sheet
             worksheet = workbook.add_sheet(str(keyWordNum) + '_natural_position')
             row = 0
             for title in self.resultDic.get(keyWord).get(keyWord + '_natural_position'):
                 worksheet.write(row, 0, title)
                 row += 1
 
+            # 整体位sheet
             worksheet = workbook.add_sheet(str(keyWordNum) + '_all_position')
             row = 0
             for title in self.resultDic.get(keyWord).get(keyWord + '_all_position'):
